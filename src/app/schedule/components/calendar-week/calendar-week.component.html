@@ -2,7 +2,7 @@
   <div class="mx-5 row d-flex gap-2 justify-content-start">
     <div class="col">
       <div class="row d-flex justify-content-start">
-        <div class="col" *ngFor="let day of weekDayList">
+        <div class="col" *ngFor="let day of weekDayList" (click)="changeView(day)">
           <div class="custom_header">
             {{ day.day }}
           </div>

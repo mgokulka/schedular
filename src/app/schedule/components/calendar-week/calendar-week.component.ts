@@ -18,9 +18,9 @@ import {
 export class CalendarWeekComponent implements OnInit, AfterViewInit {
   _syncService = inject(SyncScheduleService);
   weekDayList: any[] = [];
-  constructor(private applicationRef: ApplicationRef) {}
+  constructor(private applicationRef: ApplicationRef) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
   ngAfterViewInit(): void {
     Promise.resolve().then(() => {
       this._syncService.currentDetails.subscribe(
@@ -32,5 +32,11 @@ export class CalendarWeekComponent implements OnInit, AfterViewInit {
         }
       );
     });
+  }
+  changeView(day: any) {
+    this._syncService.setValue({
+      currentDate: new Date(day.date),
+      currentView:'day'
+    })
   }
 }

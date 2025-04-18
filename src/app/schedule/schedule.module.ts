@@ -9,10 +9,10 @@ import { EventDialogComponent } from './components/event-dialog/event-dialog.com
 import { DialogModule } from 'primeng/dialog';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { CalendarWeekComponent } from './components/calendar-week/calendar-week.component';
 import { ButtonModule } from 'primeng/button';
+import { CalendarDayComponent } from './components/calendar-day/calendar-day.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +20,7 @@ import { ButtonModule } from 'primeng/button';
     CalendarMonthComponent,
     CalendarHeaderComponent,
     YearMonthPickerComponent,
+    CalendarDayComponent,
     CalendarWeekComponent,
     EventDialogComponent,
   ],

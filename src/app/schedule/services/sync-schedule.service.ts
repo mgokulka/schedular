@@ -9,7 +9,7 @@ export interface currentDetails {
   providedIn: 'root',
 })
 export class SyncScheduleService {
-  constructor() {}
+  constructor() { }
   currentDetailsSubject = new BehaviorSubject<currentDetails>({
     cuurentWeekDayList: [],
     currentDate: new Date(),
@@ -38,7 +38,7 @@ export class SyncScheduleService {
       dateArray.push(dateObj);
       start.setDate(start.getDate() + 1); // Moves to the next day
     }
-    this.currentDetailsSubject.next({ cuurentWeekDayList: dateArray });
+    this.setValue({ cuurentWeekDayList: dateArray });
   }
   getWeekRange(date: Date): string {
     // Get the day of the week (0 = Sunday, 6 = Saturday)

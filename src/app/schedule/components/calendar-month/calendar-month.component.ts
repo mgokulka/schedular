@@ -9,11 +9,11 @@ import { SyncScheduleService } from '../../services/sync-schedule.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalendarMonthComponent implements OnInit {
-  constructor(private readonly syncScheduleService: SyncScheduleService) {}
+  constructor(private readonly syncScheduleService: SyncScheduleService) { }
   ngOnInit(): void {
     this.syncScheduleService.currentDetails.subscribe((data) => {
-        this.viewDate = data.currentDate || new Date();
-      
+      this.viewDate = data.currentDate || new Date();
+
     });
   }
   viewDate: Date = new Date();
@@ -33,10 +33,10 @@ export class CalendarMonthComponent implements OnInit {
 
   changeDay(date: Date) {
     this.viewDate = date;
-    this.syncScheduleService.currentDetailsSubject.next({
+    this.syncScheduleService.setValue({
       currentDate: date,
       currentView: 'week',
-    });
-    // this.view = CalendarView.Day;
+    })
+
   }
 }

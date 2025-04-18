@@ -20,7 +20,7 @@ export class CalendarHeaderComponent implements OnInit {
   view: string = '';
   viewDate: Date = new Date();
   _syncService = inject(SyncScheduleService);
-  constructor(private datePipe: DatePipe) {}
+  constructor(private datePipe: DatePipe) { }
 
   ngOnInit() {
     Promise.resolve().then(() => {
@@ -29,6 +29,7 @@ export class CalendarHeaderComponent implements OnInit {
         this.view = data.currentView || 'month';
         this.selectedDate = new Date(this.viewDate);
         this.selectedYear = this.selectedDate.getFullYear();
+        this.selectedMonth = this.selectedDate.getMonth();
       });
     });
     const currentYear = new Date().getFullYear();
@@ -37,15 +38,16 @@ export class CalendarHeaderComponent implements OnInit {
   decrement() {
     if (this.view === 'month') {
       this._syncService.setValue({ currentDate: subMonths(this.viewDate, 1) });
-      this._syncService.setValue({ currentDate: subMonths(this.viewDate, 1) });
     } else if (this.view === 'week') {
-      this._syncService.setValue({ currentDate: subMonths(this.viewDate, 1) });
+      this._syncService.setValue({ currentDate: subWeeks(this.viewDate, 1) });
     }
   }
 
   increment() {
     if (this.view === 'month') {
-      this._syncService.setValue({ currentDate: addWeeks(this.viewDate, 1) });
+      this._syncService.setValue({ currentDate: addMonths(this.viewDate, 1) });
+    }
+    else if (this.view === 'week') {
       this._syncService.setValue({ currentDate: addWeeks(this.viewDate, 1) });
     }
   }

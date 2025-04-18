@@ -19,7 +19,7 @@
 
     <div class="" *ngSwitchCase="'week'">
       <h5 class="m-0 text-center flex-grow-1">
-        {{_syncService.getWeekRange(viewDate) }}
+        {{ _syncService.getWeekRange(viewDate) }}
       </h5>
     </div>
   </div>
@@ -40,7 +40,7 @@
     >
       Month
     </button>
-
+  
     <button
       class="btn"
       [ngClass]="view === 'year' ? 'btn-primary' : 'btn-outline-primary'"
@@ -51,8 +51,13 @@
   </div>
 </div>
 
-
-<p-dialog [(visible)]="showPanel" [modal]=true [closable]="true" [style]="{width: '300px'}" header="Select Month & Year">
+<p-dialog
+  [(visible)]="showPanel"
+  [modal]="true"
+  [closable]="true"
+  [style]="{ width: '300px' }"
+  header="Select Month & Year"
+>
   <div class="d-flex justify-content-between align-items-center mb-3">
     <label for="yearSelect">Year:</label>
     <select id="yearSelect" class="form-select ms-2" [(ngModel)]="selectedYear">
@@ -60,31 +65,13 @@
     </select>
   </div>
   <div class="month-grid">
-    <button *ngFor="let month of months; let i = index"
-            class="btn btn-sm text-dark btn-outline-primary m-1"
-            [class.btn-primary]="selectedMonth === i"
-            (click)="selectMonth(i)">
+    <button
+      *ngFor="let month of months; let i = index"
+      class="btn btn-sm text-dark btn-outline-primary m-1"
+      [class.btn-primary]="selectedMonth === i"
+      (click)="selectMonth(i)"
+    >
       {{ month }}
     </button>
   </div>
 </p-dialog>
-
-<!-- <p-dialog
-  header="Edit Profile"
-  [modal]="false"
-  [(visible)]="showPanel"
-  [style]="{ width: '25rem' }"
-  [baseZIndex]="100"
-  appendTo="“body”"
->
-  <span class="p-text-secondary block mb-5">Update your information.</span>
-  <div class="flex align-items-center gap-3 mb-3">
-    <label for="username" class="font-semibold w-6rem">Username</label>
-    <input pInputText id="username" class="flex-auto" autocomplete="off" />
-  </div>
-  <div class="flex align-items-center gap-3 mb-5">
-    <label for="email" class="font-semibold w-6rem">Email</label>
-    <input pInputText id="email" class="flex-auto" autocomplete="off" />
-  </div>
-  <div class="flex justify-content-end gap-2"></div>
-</p-dialog> -->

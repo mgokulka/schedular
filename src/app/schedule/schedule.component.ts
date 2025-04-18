@@ -10,7 +10,7 @@ export class ScheduleComponent implements OnInit {
 
   ngOnInit(): void {
     this.syncScheduleService.setValue({
-      currentView: 'week',
+      currentView: 'month',
       currentDate: new Date(),
       cuurentWeekDayList:[]
     });

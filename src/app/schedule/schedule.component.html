@@ -1,0 +1,28 @@
+<div class="my-3">
+  <app-calendar-header></app-calendar-header>
+</div>
+
+<section class="mx-5 my-3 table_left_view d-flex gap-2 shadow row h-75 w">
+  <section class="col-4 custom_table_sidebar">
+    <div class="mx-1 h-auto row d-flex gap-2 justify-content-start">
+      <div
+        class="border-end border-2 border-secondary justify-content-end d-flex align-items-center"
+      >
+        <h3>List of hospitals here</h3>
+      </div>
+    </div>
+  </section>
+  <section class="col table_right_view">
+    <div [ngSwitch]="view">
+      <div *ngSwitchCase="'month'">
+        <app-calendar-month></app-calendar-month>
+      </div>
+      <div *ngSwitchCase="'week'">
+        <app-calendar-week></app-calendar-week>
+      </div>
+      <!-- <div *ngSwitchCase="'day'">
+          <app-calendar-day  [(viewDate)]="viewDate"></app-calendar-day> 
+      </div> -->
+    </div>
+  </section>
+</section>

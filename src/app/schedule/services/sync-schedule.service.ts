@@ -14,7 +14,7 @@ export class SyncScheduleService {
     cuurentWeekDayList: [],
     currentDate: new Date(),
     currentView: 'week',
-  });
+});
   public currentDetails = this.currentDetailsSubject.asObservable();
 
   setValue(newData: Partial<currentDetails>): void {
@@ -32,7 +32,10 @@ export class SyncScheduleService {
 
     while (start <= end) {
       const dateObj = {
-        date: start.toISOString().split('T')[0], // Converts date to 'YYYY-MM-DD' format
+        date:start.toLocaleDateString('en-US', {
+          month: 'short',
+          day: 'numeric',
+        }), // Converts date to 'YYYY-MM-DD' format
         day: start.toLocaleDateString('en-US', { weekday: 'long' }), // Gets the day name
       };
       dateArray.push(dateObj);
@@ -41,25 +44,40 @@ export class SyncScheduleService {
     this.setValue({ cuurentWeekDayList: dateArray });
   }
   getWeekRange(date: Date): string {
-    // Get the day of the week (0 = Sunday, 6 = Saturday)
     const dayOfWeek = date.getDay();
 
-    // Calculate the start and end of the week
+    // Clone the date to avoid modifying the input date
     const startOfWeek = new Date(date);
     const endOfWeek = new Date(date);
 
+    // Calculate start and end of the week
     startOfWeek.setDate(date.getDate() - dayOfWeek);
     endOfWeek.setDate(date.getDate() + (6 - dayOfWeek));
 
-    // Format the dates to "dd-mm-yyyy"
-    const formatDate = (d: Date): string =>
-      `${d.getDate().toString().padStart(2, '0')}-${(d.getMonth() + 1)
-        .toString()
-        .padStart(2, '0')}-${d.getFullYear()}`;
+    // Format the dates to "Mon DD"
+    const formatShortDate = (d: Date): string =>
+        `${d.toLocaleString("default", { month: "short" })} ${d.getDate()}`;
 
-    const start = new Date(startOfWeek).toISOString().split('T')[0];
-    const end = new Date(endOfWeek).toISOString().split('T')[0];
+    // Format dates to "YYYY-MM-DD" for weekdayViewDetails
+    const formatFullDate = (d: Date): string =>
+        d.toLocaleDateString("en-CA"); // Outputs in "YYYY-MM-DD" format
+
+    // Get formatted dates
+    const start = formatFullDate(startOfWeek);
+    const end = formatFullDate(endOfWeek);
+
+    // Call weekdayViewDetails with formatted dates
     this.weekdayViewDetails(start, end);
-    return `${formatDate(startOfWeek)} to ${formatDate(endOfWeek)}`;
+
+    // Return the range in "Mon DD - Mon DD, YYYY" format
+    return `${formatShortDate(startOfWeek)} - ${formatShortDate(endOfWeek)}, ${startOfWeek.getFullYear()}`;
+}
+  getFormattedFullDate(date: Date): string {
+    return date.toLocaleDateString('en-US', {
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    });
   }
 }

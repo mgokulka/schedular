@@ -2,12 +2,12 @@
   <div class="mx-5 row d-flex gap-2 justify-content-start">
     <div class="col">
       <div class="row d-flex justify-content-start">
-        <div class="col" *ngFor="let day of weekDayList" (click)="changeView(day)">
+        <div class="col" ngClass="" *ngFor="let day of weekDayList" (click)="changeView(day)">
           <div class="custom_header">
             {{ day.day }}
           </div>
           <div class="subtitle text-center">
-            {{ day.date | date : "shortDate" }}
+            {{ day.date }}
           </div>
         </div>
       </div>

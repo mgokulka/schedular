@@ -1,6 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { CalendarEvent } from 'angular-calendar';
+import {
+  CalendarEvent,
+  CalendarMonthViewBeforeRenderEvent,
+} from 'angular-calendar';
 import { SyncScheduleService } from '../../services/sync-schedule.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-calendar-month',
@@ -9,14 +13,16 @@ import { SyncScheduleService } from '../../services/sync-schedule.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalendarMonthComponent implements OnInit {
-  constructor(private readonly syncScheduleService: SyncScheduleService) { }
+  selectedDateHieghLight: Date = new Date();
+  constructor(private readonly syncScheduleService: SyncScheduleService) {}
   ngOnInit(): void {
     this.syncScheduleService.currentDetails.subscribe((data) => {
       this.viewDate = data.currentDate || new Date();
-
+      this.refresh.next();
     });
   }
   viewDate: Date = new Date();
+  refresh = new Subject<void>();
 
   events: CalendarEvent[] = [
     {
@@ -32,11 +38,21 @@ export class CalendarMonthComponent implements OnInit {
   ];
 
   changeDay(date: Date) {
+    this.selectedDateHieghLight = date;
     this.viewDate = date;
     this.syncScheduleService.setValue({
       currentDate: date,
       currentView: 'week',
-    })
-
+    });
+  }
+  beforeMonthViewRender(renderEvent: CalendarMonthViewBeforeRenderEvent): void {
+    renderEvent.body.forEach((day) => {
+      if (
+        day.date.getDate() === this.selectedDateHieghLight.getDate() &&
+        day.inMonth
+      ) {
+        day.cssClass = 'border border-dark border-3 text-dark fw-bold bg-light'; // Add your custom class here
+      }
+    });
   }
 }

@@ -22,6 +22,12 @@
         {{ _syncService.getWeekRange(viewDate) }}
       </h5>
     </div>
+
+    <div class="" *ngSwitchCase="'day'">
+      <h5 class="m-0 text-center flex-grow-1">
+        {{ _syncService.getFormattedFullDate(viewDate) }}
+      </h5>
+    </div>
   </div>
 
   <div class="calendar-nav d-flex">

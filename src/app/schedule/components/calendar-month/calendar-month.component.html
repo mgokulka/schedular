@@ -1,8 +1,10 @@
-<div class="mx-5">
+<div class="mx-5 h-100 w-100">
   <mwl-calendar-month-view
+    (beforeViewRender)="beforeMonthViewRender($event)"
     [viewDate]="viewDate"
     (dayClicked)="changeDay($event.day.date)"
     [events]="events"
+    [refresh]="refresh"
   >
   </mwl-calendar-month-view>
 </div>

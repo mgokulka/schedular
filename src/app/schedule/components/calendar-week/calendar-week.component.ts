@@ -18,14 +18,18 @@ import {
 export class CalendarWeekComponent implements OnInit, AfterViewInit {
   _syncService = inject(SyncScheduleService);
   weekDayList: any[] = [];
+  currentDate: Date = new Date();
   constructor(private applicationRef: ApplicationRef) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    // this._syncService.getWeekRange(this.currentDate);
+   }
   ngAfterViewInit(): void {
     Promise.resolve().then(() => {
       this._syncService.currentDetails.subscribe(
         (data: currentDetails) => {
           this.weekDayList = data.cuurentWeekDayList || [];
+          this.currentDate = data.currentDate || new Date();
         },
         (error) => {
           console.error('Error:', error);

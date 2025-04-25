@@ -33,7 +33,7 @@ export class CalendarHeaderComponent implements OnInit {
       });
     });
     const currentYear = new Date().getFullYear();
-    this.years = Array.from({ length: 21 }, (_, i) => currentYear - 10 + i);
+    this.years = Array.from({ length: 21 }, (_, i) => currentYear + i);
   }
   decrement() {
     if (this.view === 'month') {

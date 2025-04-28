@@ -9,7 +9,16 @@ import {
   currentDetails,
   SyncScheduleService,
 } from '../../services/sync-schedule.service';
+export interface CalendarSlot {
+  time?: string; // Optional: if you want specific time slots
+  status: 'available' | 'unavailable' | 'empty'; // Status control
+}
 
+export interface CalendarDay {
+  date: Date; // Full date (e.g., 2025-04-27)
+  dayName: string; // 'Sunday', 'Monday', etc.
+  slots: CalendarSlot[]; // List of slots under this day
+}
 @Component({
   selector: 'app-calendar-week',
   templateUrl: './calendar-week.component.html',
@@ -19,11 +28,34 @@ export class CalendarWeekComponent implements OnInit, AfterViewInit {
   _syncService = inject(SyncScheduleService);
   weekDayList: any[] = [];
   currentDate: Date = new Date();
-  constructor(private applicationRef: ApplicationRef) { }
+  constructor(private readonly applicationRef: ApplicationRef) { }
 
+  weekData: CalendarDay[] = [
+    {
+      date: new Date('2025-04-27'),
+      dayName: 'Sunday',
+      slots: [
+        { status: 'available' },
+        { status: 'empty' },
+        { status: 'available' },
+        { status: 'empty' }
+      ]
+    },
+    {
+      date: new Date('2025-04-28'),
+      dayName: 'Monday',
+      slots: [
+        { status: 'empty' },
+        { status: 'available' },
+        { status: 'empty' },
+        { status: 'available' }
+      ]
+    },
+    // ... similarly for Tuesday to Saturday
+  ];
   ngOnInit(): void {
     // this._syncService.getWeekRange(this.currentDate);
-   }
+  }
   ngAfterViewInit(): void {
     Promise.resolve().then(() => {
       this._syncService.currentDetails.subscribe(
@@ -40,7 +72,7 @@ export class CalendarWeekComponent implements OnInit, AfterViewInit {
   changeView(day: any) {
     this._syncService.setValue({
       currentDate: new Date(day.date),
-      currentView:'day'
+      currentView: 'day'
     })
   }
 }

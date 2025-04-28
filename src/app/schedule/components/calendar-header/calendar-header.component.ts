@@ -32,8 +32,8 @@ export class CalendarHeaderComponent implements OnInit {
         this.selectedMonth = this.selectedDate.getMonth();
       });
     });
-    const currentYear = new Date().getFullYear();
-    this.years = Array.from({ length: 21 }, (_, i) => currentYear + i);
+    const currentYear = new Date().getFullYear()-1;
+    this.years = Array.from({ length: 10 }, (_, i) => currentYear + i);
   }
   decrement() {
     if (this.view === 'month') {

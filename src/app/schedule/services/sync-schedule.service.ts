@@ -14,7 +14,7 @@ export class SyncScheduleService {
     cuurentWeekDayList: [],
     currentDate: new Date(),
     currentView: 'week',
-});
+  });
   public currentDetails = this.currentDetailsSubject.asObservable();
 
   setValue(newData: Partial<currentDetails>): void {
@@ -24,6 +24,9 @@ export class SyncScheduleService {
 
     this.currentDetailsSubject.next(updatedValue);
   }
+  getValue() {
+    return this.currentDetailsSubject.getValue();
+  }
 
   weekdayViewDetails(startDate: any, endDate: any) {
     const start = new Date(startDate);
@@ -32,7 +35,7 @@ export class SyncScheduleService {
 
     while (start <= end) {
       const dateObj = {
-        date:start.toLocaleDateString('en-US', {
+        date: start.toLocaleDateString('en-US', {
           month: 'short',
           day: 'numeric',
         }), // Converts date to 'YYYY-MM-DD' format
@@ -56,11 +59,11 @@ export class SyncScheduleService {
 
     // Format the dates to "Mon DD"
     const formatShortDate = (d: Date): string =>
-        `${d.toLocaleString("default", { month: "short" })} ${d.getDate()}`;
+      `${d.toLocaleString("default", { month: "short" })} ${d.getDate()}`;
 
     // Format dates to "YYYY-MM-DD" for weekdayViewDetails
     const formatFullDate = (d: Date): string =>
-        d.toLocaleDateString("en-CA"); // Outputs in "YYYY-MM-DD" format
+      d.toLocaleDateString("en-CA"); // Outputs in "YYYY-MM-DD" format
 
     // Get formatted dates
     const start = formatFullDate(startOfWeek);
@@ -71,7 +74,7 @@ export class SyncScheduleService {
 
     // Return the range in "Mon DD - Mon DD, YYYY" format
     return `${formatShortDate(startOfWeek)} - ${formatShortDate(endOfWeek)}, ${startOfWeek.getFullYear()}`;
-}
+  }
   getFormattedFullDate(date: Date): string {
     return date.toLocaleDateString('en-US', {
       weekday: 'long',

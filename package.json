@@ -1,13 +1,14 @@
 {
   "name": "my-app",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:my-app": "node dist/my-app/server/server.mjs"
+    "serve:ssr:my-app": "node disret/my-app/server/server.mjs",
+    "release": "standard-version"
   },
   "private": true,
   "dependencies": {

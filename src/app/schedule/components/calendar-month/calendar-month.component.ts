@@ -56,9 +56,7 @@ export class CalendarMonthComponent implements OnInit, OnDestroy {
       ) {
         day.cssClass = 'border border-dark border-3 text-dark fw-bold bg-light'; // Add your custom class here
       }
-
-      // Apply the badgeTotal logic
-      day.badgeTotal = this.events.length
+      day.badgeTotal = day.events.length
     })
   }
 

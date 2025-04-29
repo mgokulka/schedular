@@ -9,6 +9,7 @@ import {
   currentDetails,
   SyncScheduleService,
 } from '../../services/sync-schedule.service';
+import { ViewModes } from '../../core/constants';
 export interface CalendarSlot {
   time?: string; // Optional: if you want specific time slots
   status: 'available' | 'unavailable' | 'empty'; // Status control
@@ -29,7 +30,16 @@ export class CalendarWeekComponent implements OnInit, AfterViewInit {
   weekDayList: any[] = [];
   currentDate: Date = new Date();
   constructor(private readonly applicationRef: ApplicationRef) { }
-
+  locationList: string[] = ["Apollo Hospitals",
+    "Max Super Speciality Hospital",
+    "Fortis Memorial Research Institute",
+    "Kokilaben Dhirubhai Ambani Hospital",
+    "Nanavati Super Specialty Hospital",
+    "Medanta - The Medicity",
+    "Narayana Health",
+    "Christian Medical College (CMC)",
+    "AIIMS",
+    "Artemis Hospital"]
   weekData: CalendarDay[] = [
     {
       date: new Date('2025-04-27'),
@@ -60,7 +70,7 @@ export class CalendarWeekComponent implements OnInit, AfterViewInit {
     Promise.resolve().then(() => {
       this._syncService.currentDetails.subscribe(
         (data: currentDetails) => {
-          this.weekDayList = data.cuurentWeekDayList || [];
+          this.weekDayList = data.currentWeekDayList || [];
           this.currentDate = data.currentDate || new Date();
         },
         (error) => {
@@ -68,11 +78,12 @@ export class CalendarWeekComponent implements OnInit, AfterViewInit {
         }
       );
     });
+    console.table(this.weekDayList)
   }
   changeView(day: any) {
     this._syncService.setValue({
       currentDate: new Date(day.date),
-      currentView: 'day'
+      currentView: ViewModes.day
     })
   }
 }

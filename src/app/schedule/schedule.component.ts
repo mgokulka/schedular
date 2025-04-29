@@ -1,19 +1,20 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SyncScheduleService } from './services/sync-schedule.service';
 import { Subscription } from 'rxjs';
+import { ViewModes } from './core/constants';
 @Component({
   selector: 'app-schedule',
   templateUrl: './schedule.component.html',
   styles: [],
 })
 export class ScheduleComponent implements OnInit, OnDestroy {
-  constructor(public readonly syncScheduleService: SyncScheduleService) {}
+  constructor(public readonly syncScheduleService: SyncScheduleService) { }
   private _subcription: Subscription = new Subscription();
   ngOnInit(): void {
     this.syncScheduleService.setValue({
-      currentView: 'month',
+      currentView: ViewModes.week,
       currentDate: new Date(),
-      cuurentWeekDayList: [],
+      currentWeekDayList: [],
     });
     this._subcription = this.syncScheduleService.currentDetails.subscribe(
       (data) => {

@@ -13,3 +13,23 @@
   font-weight: lighter;
   padding: 5px 0;
 }
+.bg-light1 {
+  background-color: #abeaff40 !important;
+}
+.event-box {
+  min-height: 100px;
+  max-height: 100px;
+  overflow-x: auto;
+  font-size:12px;
+  overflow: hidden;
+}
+/* .event-box:hover {
+  height: 200px;
+  width: 200px;
+  max-height: 200px;
+  overflow-x: auto;
+  z-index: 10;
+} */
+ /* .event-box :hover{
+  transform: scale(1.5);
+ } */

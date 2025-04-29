@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 export interface currentDetails {
-  cuurentWeekDayList?: any[];
+  currentWeekDayList?: any[];
   currentDate?: Date;
   currentView?: string;
 }
@@ -11,7 +11,7 @@ export interface currentDetails {
 export class SyncScheduleService {
   constructor() { }
   currentDetailsSubject = new BehaviorSubject<currentDetails>({
-    cuurentWeekDayList: [],
+    currentWeekDayList: [],
     currentDate: new Date(),
     currentView: 'week',
   });
@@ -35,16 +35,13 @@ export class SyncScheduleService {
 
     while (start <= end) {
       const dateObj = {
-        date: start.toLocaleDateString('en-US', {
-          month: 'short',
-          day: 'numeric',
-        }), // Converts date to 'YYYY-MM-DD' format
+        date: new Date(start),
         day: start.toLocaleDateString('en-US', { weekday: 'long' }), // Gets the day name
       };
       dateArray.push(dateObj);
       start.setDate(start.getDate() + 1); // Moves to the next day
     }
-    this.setValue({ cuurentWeekDayList: dateArray });
+    this.setValue({ currentWeekDayList: dateArray });
   }
   getWeekRange(date: Date): string {
     const dayOfWeek = date.getDay();
@@ -83,4 +80,6 @@ export class SyncScheduleService {
       year: 'numeric',
     });
   }
+  normalizeDate = (date:Date) => new Date(date.getFullYear(), date.getMonth(), date.getDate());
+
 }

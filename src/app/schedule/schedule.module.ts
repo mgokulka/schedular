@@ -9,11 +9,12 @@ import { EventDialogComponent } from './components/event-dialog/event-dialog.com
 import { DialogModule } from 'primeng/dialog';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CalendarWeekComponent } from './components/calendar-week/calendar-week.component';
 import { ButtonModule } from 'primeng/button';
 import { CalendarDayComponent } from './components/calendar-day/calendar-day.component';
-
+import { ShortDatePipe } from './core/pipes/short-date-pipe.pipe';
+import { SkeletonModule } from 'primeng/skeleton';
 @NgModule({
   declarations: [
     ScheduleComponent,
@@ -25,7 +26,9 @@ import { CalendarDayComponent } from './components/calendar-day/calendar-day.com
     EventDialogComponent,
   ],
   imports: [
+    ShortDatePipe,
     CommonModule,
+    SkeletonModule,
     FormsModule,
     ReactiveFormsModule,
     DatePipe,
@@ -39,4 +42,4 @@ import { CalendarDayComponent } from './components/calendar-day/calendar-day.com
   ],
   exports: [ScheduleComponent],
 })
-export class ScheduleModule {}
+export class ScheduleModule { }

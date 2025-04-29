@@ -1,18 +1,19 @@
-.month-year-display {
-    font-size: 1.5rem;
+
+
+  .custom-badge {
+    background-color: #abeaff40; 
+    color: #000;
     font-weight: bold;
-    text-align: center;
-    margin-bottom: 1rem;
-    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 50%;
+    font-size: 12px;
+    display: inline-block;
   }
-  
-  .month-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+
+  .cal-event {
+    display: none !important;
   }
-  .cal-month-view .bg-pink,
-  .cal-week-view .cal-day-columns .bg-pink,
-  .cal-day-view .bg-pink {
-    background-color: hotpink !important;
+  .cal-day-number{
+    font-size: 1.5rem;
+    font-weight: 400;
   }

@@ -5,6 +5,17 @@
     (dayClicked)="changeDay($event.day.date)"
     [events]="events"
     [refresh]="refresh"
+    [cellTemplate]="customMonthCellTemplate"
   >
   </mwl-calendar-month-view>
 </div>
+<ng-template #customMonthCellTemplate let-day="day">
+  <div class="my-custom-template">
+    <div *ngIf="day.badgeTotal > 0" class="custom-badge">
+      <span class="custom-badge" [title]="day.badgeTotal + ' Appointments'">
+        {{ day.badgeTotal }}
+      </span>
+    </div>
+    <div class="cal-day-number">{{ day.date | date: 'd' }}</div>
+  </div>
+</ng-template>

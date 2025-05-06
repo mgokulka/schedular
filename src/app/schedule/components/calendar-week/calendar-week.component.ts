@@ -25,7 +25,7 @@ export interface CalendarDay {
   templateUrl: './calendar-week.component.html',
   styleUrl: './calendar-week.component.css',
 })
-export class CalendarWeekComponent implements OnInit, AfterViewInit {
+export class CalendarWeekComponent implements OnInit {
   _syncService = inject(SyncScheduleService);
   weekDayList: any[] = [];
   currentDate: Date = new Date();
@@ -64,22 +64,18 @@ export class CalendarWeekComponent implements OnInit, AfterViewInit {
     // ... similarly for Tuesday to Saturday
   ];
   ngOnInit(): void {
-    // this._syncService.getWeekRange(this.currentDate);
-  }
-  ngAfterViewInit(): void {
-    Promise.resolve().then(() => {
+
+    setTimeout(() => {
       this._syncService.currentDetails.subscribe(
         (data: currentDetails) => {
+          this.weekData = [];
           this.weekDayList = data.currentWeekDayList || [];
           this.currentDate = data.currentDate || new Date();
-        },
-        (error) => {
-          console.error('Error:', error);
         }
-      );
-    });
-    console.table(this.weekDayList)
+      )
+    }, 0);
   }
+
   changeView(day: any) {
     this._syncService.setValue({
       currentDate: new Date(day.date),

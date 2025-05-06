@@ -4,7 +4,7 @@ import { SyncScheduleService, currentDetails } from '../../services/sync-schedul
 @Component({
   selector: 'app-calendar-day',
   templateUrl: './calendar-day.component.html',
-  styleUrl: './calendar-day.component.scss'
+  styleUrl: './calendar-day.component.css'
 })
 export class CalendarDayComponent implements OnInit {
   _syncService = inject(SyncScheduleService);

@@ -7,9 +7,10 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
-import { addMonths, addWeeks, subMonths, subWeeks } from 'date-fns';
+import { addDays, addMonths, addWeeks, subDays, subMonths, subWeeks } from 'date-fns';
 import { DatePipe } from '@angular/common';
 import { SyncScheduleService } from '../../services/sync-schedule.service';
+import { ViewModes } from '../../core/constants';
 
 @Component({
   selector: 'app-calendar-header',
@@ -32,24 +33,38 @@ export class CalendarHeaderComponent implements OnInit {
         this.selectedMonth = this.selectedDate.getMonth();
       });
     });
-    const currentYear = new Date().getFullYear()-1;
+    const currentYear = new Date().getFullYear() - 1;
     this.years = Array.from({ length: 10 }, (_, i) => currentYear + i);
   }
   decrement() {
-    if (this.view === 'month') {
-      this._syncService.setValue({ currentDate: subMonths(this.viewDate, 1) });
-    } else if (this.view === 'week') {
-      this._syncService.setValue({ currentDate: subWeeks(this.viewDate, 1) });
+    let currDate
+    if (this.view === ViewModes.month) {
+      currDate = subMonths(this.viewDate, 1)
+    } else if (this.view === ViewModes.week) {
+      currDate = subWeeks(this.viewDate, 1)
     }
+    else if (this.view === ViewModes.day) {
+      currDate = subDays(this.viewDate, 1)
+    }
+    this._syncService.setValue({ currentDate: currDate });
+    this._syncService.getWeekRange(currDate ?? new Date())
   }
 
   increment() {
-    if (this.view === 'month') {
-      this._syncService.setValue({ currentDate: addMonths(this.viewDate, 1) });
+    let currDate
+    if (this.view === ViewModes.month) {
+      currDate = addMonths(this.viewDate, 1)
+      // this._syncService.setValue({ currentDate:  });
     }
-    else if (this.view === 'week') {
-      this._syncService.setValue({ currentDate: addWeeks(this.viewDate, 1) });
+    else if (this.view === ViewModes.week) {
+      currDate = addWeeks(this.viewDate, 1)
+      // this._syncService.setValue({ currentDate:  });
     }
+    else if (this.view === ViewModes.day) {
+      currDate = addDays(this.viewDate, 1)
+    }
+    this._syncService.setValue({ currentDate: currDate });
+    this._syncService.getWeekRange(currDate ?? new Date())
   }
 
   today() {

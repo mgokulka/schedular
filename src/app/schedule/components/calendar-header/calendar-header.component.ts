@@ -33,7 +33,7 @@ export class CalendarHeaderComponent implements OnInit {
         this.selectedMonth = this.selectedDate.getMonth();
       });
     });
-    const currentYear = new Date().getFullYear() - 1;
+    const currentYear = new Date().getFullYear() ;
     this.years = Array.from({ length: 10 }, (_, i) => currentYear + i);
   }
   decrement() {
@@ -54,11 +54,9 @@ export class CalendarHeaderComponent implements OnInit {
     let currDate
     if (this.view === ViewModes.month) {
       currDate = addMonths(this.viewDate, 1)
-      // this._syncService.setValue({ currentDate:  });
     }
     else if (this.view === ViewModes.week) {
       currDate = addWeeks(this.viewDate, 1)
-      // this._syncService.setValue({ currentDate:  });
     }
     else if (this.view === ViewModes.day) {
       currDate = addDays(this.viewDate, 1)

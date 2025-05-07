@@ -52,7 +52,7 @@
     >
       Month
     </button>
-  
+
     <button
       class="btn"
       [ngClass]="view === 'year' ? 'btn-primary' : 'btn-outline-primary'"
@@ -66,16 +66,30 @@
 <p-dialog
   [(visible)]="showPanel"
   [modal]="true"
+  position="topright"
   [closable]="true"
   [style]="{ width: '300px' }"
   header="Select Month & Year"
 >
-  <div class="d-flex justify-content-between align-items-center mb-3">
+  <!-- <div class="d-flex justify-content-between align-items-center mb-3">
     <label for="yearSelect">Year:</label>
     <select id="yearSelect" class="form-select ms-2" [(ngModel)]="selectedYear">
       <option *ngFor="let year of years" [value]="year">{{ year }}</option>
     </select>
+  </div> -->
+
+  <div class="year-grid">
+    
+    <button
+      *ngFor="let year of [2025, 2026, 2027, 2028]; let i = index"
+      class="btn btn-sm text-dark btn-outline-primary m-1"
+      [class.btn-primary]="selectedYear === year"
+      (click)="selectedYear = year"
+    >
+      {{ year }}
+    </button>
   </div>
+  <hr>
   <div class="month-grid">
     <button
       *ngFor="let month of months; let i = index"

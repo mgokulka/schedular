@@ -3,13 +3,15 @@ import {
   Component,
   inject,
   OnInit,
-  AfterViewInit,
+  OnDestroy,
 } from '@angular/core';
 import {
   currentDetails,
   SyncScheduleService,
 } from '../../services/sync-schedule.service';
 import { ViewModes } from '../../core/constants';
+import { CalendarEvent } from 'angular-calendar';
+import { Subscription } from 'rxjs';
 export interface CalendarSlot {
   time?: string; // Optional: if you want specific time slots
   status: 'available' | 'unavailable' | 'empty'; // Status control
@@ -25,21 +27,23 @@ export interface CalendarDay {
   templateUrl: './calendar-week.component.html',
   styleUrl: './calendar-week.component.css',
 })
-export class CalendarWeekComponent implements OnInit {
+export class CalendarWeekComponent implements OnInit, OnDestroy {
   _syncService = inject(SyncScheduleService);
+
   weekDayList: any[] = [];
+  events: any | CalendarEvent[] = [];
   currentDate: Date = new Date();
   constructor(private readonly applicationRef: ApplicationRef) { }
   locationList: string[] = ["Apollo Hospitals",
     "Max Super Speciality Hospital",
     "Fortis Memorial Research Institute",
     "Kokilaben Dhirubhai Ambani Hospital",
-    "Nanavati Super Specialty Hospital",
-    "Medanta - The Medicity",
-    "Narayana Health",
-    "Christian Medical College (CMC)",
-    "AIIMS",
-    "Artemis Hospital"]
+    "Nanavati Super Specialty Hospital"]
+  // "Medanta - The Medicity",
+  // "Narayana Health",
+  // "Christian Medical College (CMC)",
+  // "AIIMS",
+  // "Artemis Hospital"]
   weekData: CalendarDay[] = [
     {
       date: new Date('2025-04-27'),
@@ -63,17 +67,29 @@ export class CalendarWeekComponent implements OnInit {
     },
     // ... similarly for Tuesday to Saturday
   ];
+  private _subscription: Subscription = new Subscription()
+
+  ngOnDestroy(): void {
+    if (this._subscription)
+      this._subscription.unsubscribe();
+  }
   ngOnInit(): void {
 
     setTimeout(() => {
-      this._syncService.currentDetails.subscribe(
+      this._subscription = this._syncService.currentDetails.subscribe(
         (data: currentDetails) => {
           this.weekData = [];
           this.weekDayList = data.currentWeekDayList || [];
           this.currentDate = data.currentDate || new Date();
+          this.events = this._syncService.generateMonthEvents()
+          let firstIndex = this.events.findIndex((ele: any) => ele.start.toLocaleDateString() == this.weekDayList[0].date.toLocaleDateString())
+          let lastIndex = this.events.findLastIndex((ele: any) => ele.start.toLocaleDateString() == this.weekDayList[6].date.toLocaleDateString())
+          this.events = this.events.slice(firstIndex, lastIndex)
+          console.log(this.events)
         }
       )
     }, 0);
+
   }
 
   changeView(day: any) {

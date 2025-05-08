@@ -2,11 +2,15 @@
   <div class="calendar-nav d-flex">
     <button class="btn btn-outline-primary me-1" (click)="decrement()">
       Prev
+      <div style="font-size: x-small" class="text-muted">alt+p</div>
     </button>
     <button class="btn btn-outline-secondary me-1" (click)="today()">
       Today
+      <div style="font-size: x-small" class="text-muted">alt+t</div>
     </button>
-    <button class="btn btn-outline-primary" (click)="increment()">Next</button>
+    <button class="btn btn-outline-primary" (click)="increment()">Next
+      <div style="font-size: x-small;" class="text-muted">alt+n</div>
+    </button>
   </div>
 
   <div class="" [ngSwitch]="view">
@@ -36,6 +40,7 @@
       (click)="changeView('day')"
     >
       Day
+      <div style="font-size: x-small" class="text-muted">alt+d</div>
     </button>
     <button
       class="btn me-1"
@@ -43,6 +48,7 @@
       (click)="changeView('week')"
     >
       Week
+      <div style="font-size: x-small;" class="text-muted">alt+w</div>
     </button>
 
     <button
@@ -51,6 +57,7 @@
       (click)="changeView('month')"
     >
       Month
+      <div style="font-size: x-small;" class="text-muted">alt+m</div>
     </button>
 
     <button
@@ -59,6 +66,7 @@
       (click)="togglePanel()"
     >
       Year
+      <div style="font-size: x-small;" class="text-muted">alt+y</div>
     </button>
   </div>
 </div>
@@ -79,7 +87,6 @@
   </div> -->
 
   <div class="year-grid">
-    
     <button
       *ngFor="let year of [2025, 2026, 2027, 2028]; let i = index"
       class="btn btn-sm text-dark btn-outline-primary m-1"
@@ -89,7 +96,7 @@
       {{ year }}
     </button>
   </div>
-  <hr>
+  <hr />
   <div class="month-grid">
     <button
       *ngFor="let month of months; let i = index"

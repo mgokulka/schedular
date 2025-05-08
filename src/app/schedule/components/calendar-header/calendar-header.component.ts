@@ -1,5 +1,5 @@
 import {
-  Component,
+  HostListener, Component,
   Input,
   Output,
   EventEmitter,
@@ -18,6 +18,43 @@ import { ViewModes } from '../../core/constants';
   providers: [DatePipe],
 })
 export class CalendarHeaderComponent implements OnInit {
+  @HostListener('window:keydown.alt.m', ['$event'])
+  onCtrlM(event: KeyboardEvent) {
+    event.preventDefault(); // Prevents default browser behavior
+    this._syncService.setValue({ currentView: ViewModes.month })
+  }
+  @HostListener('window:keydown.alt.w', ['$event'])
+  onAltW(event: KeyboardEvent) {
+    event.preventDefault(); // Prevents default browser behavior
+    this._syncService.setValue({ currentView: ViewModes.week });
+  }
+  @HostListener('window:keydown.alt.d', ['$event'])
+  onAltD(event: KeyboardEvent) {
+    event.preventDefault(); // Prevents default browser behavior
+    this._syncService.setValue({ currentView: ViewModes.day });
+  }
+  @HostListener('window:keydown.alt.P', ['$event'])
+  onCtrlP(event: KeyboardEvent) {
+    event.preventDefault(); // Prevents default browser behavior
+    this.decrement()
+  }
+  @HostListener('window:keydown.alt.n', ['$event'])
+  onAltN(event: KeyboardEvent) {
+    event.preventDefault(); // Prevents default browser behavior
+    this.increment();
+  }
+  @HostListener('window:keydown.alt.t', ['$event'])
+  onAltT(event: KeyboardEvent) {
+    event.preventDefault(); // Prevents default browser behavior
+    this.today();
+  }
+  @HostListener('window:keydown.alt.y', ['$event'])
+  onAltY(event: KeyboardEvent) {
+    event.preventDefault(); // Prevents default browser behavior
+    this.togglePanel()
+  }
+
+
   view: string = '';
   viewDate: Date = new Date();
   _syncService = inject(SyncScheduleService);
@@ -33,7 +70,7 @@ export class CalendarHeaderComponent implements OnInit {
         this.selectedMonth = this.selectedDate.getMonth();
       });
     });
-    const currentYear = new Date().getFullYear() ;
+    const currentYear = new Date().getFullYear();
     this.years = Array.from({ length: 10 }, (_, i) => currentYear + i);
   }
   decrement() {

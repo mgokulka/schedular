@@ -15,9 +15,47 @@ import { ViewModes } from '../../core/constants';
 @Component({
   selector: 'app-calendar-header',
   templateUrl: './calendar-header.component.html',
+  styleUrl: './calendar-header.component.css',
   providers: [DatePipe],
 })
 export class CalendarHeaderComponent implements OnInit {
+  currentMonth: number = new Date().getMonth();
+  currentYear: number = new Date().getFullYear();
+  monthNames: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  get today1(): { month: number, year: number } {
+    const today = new Date();
+    return {
+      month: today.getMonth(),
+      year: today.getFullYear()
+    };
+  }
+
+  onMonthScroll(event: WheelEvent) {
+    event.preventDefault();
+    let newMonth = this.currentMonth + (event.deltaY > 0 ? 1 : -1);
+    if (newMonth < 0) newMonth = 11;
+    if (newMonth > 11) newMonth = 0;
+
+    if (this.isValidMonthYear(newMonth, this.currentYear)) {
+      this.currentMonth = newMonth;
+    }
+  }
+
+  onYearScroll(event: WheelEvent) {
+    event.preventDefault();
+    let newYear = this.currentYear + (event.deltaY > 0 ? 1 : -1);
+
+    if (this.isValidMonthYear(this.currentMonth, newYear)) {
+      this.currentYear = newYear;
+    }
+  }
+
+  isValidMonthYear(month: number, year: number): boolean {
+    if (year < this.today1.year) return false;
+    if (year === this.today1.year && month < this.today1.month) return false;
+    return true;
+  }
   @HostListener('window:keydown.alt.m', ['$event'])
   onCtrlM(event: KeyboardEvent) {
     event.preventDefault(); // Prevents default browser behavior

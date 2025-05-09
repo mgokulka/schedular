@@ -15,9 +15,17 @@
 
   <div class="" [ngSwitch]="view">
     <div class="" *ngSwitchCase="'month'">
-      <h5 class="m-0 text-center flex-grow-1">
+      <!-- <h5 class="m-0 text-center flex-grow-1">
         {{ formattedMonthYear }}
-      </h5>
+      </h5> -->
+      <div class="date-header">
+        <span class="scrollable" tabindex="0" (wheel)="onMonthScroll($event)">
+          {{ monthNames[currentMonth] }}
+        </span>
+        <span class="scrollable" tabindex="0" (wheel)="onYearScroll($event)">
+          {{ currentYear }}
+        </span>
+      </div>
     </div>
 
     <div class="" *ngSwitchCase="'week'">

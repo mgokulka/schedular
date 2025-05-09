@@ -1,0 +1,64 @@
+/* Container styling for the date header */
+.date-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    padding: 10px 20px;
+    background: #f4f4f4;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+  }
+  
+  /* Styling for the scrollable month/year areas */
+  .scrollable {
+    position: relative;
+    cursor: pointer; /* Indicating the area is clickable/scrollable */
+    font-weight: bold;
+    padding: 8px 12px;
+    background: #ffffff;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.2s ease;
+    display: inline-block;
+  }
+  
+  /* Hover effect: make the scrollable area more visually distinct */
+  .scrollable:hover {
+    background: #e0f7fa;
+    transform: scale(1.05); /* Slight scale effect to show interactivity */
+  }
+  
+  /* Scroll indicator (arrows) inside the scrollable areas */
+  .scrollable::before {
+    content: '↕'; /* Up-down arrow symbol */
+    position: absolute;
+    top: 40%;
+    left: 95%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    color: #00796b;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  /* Show the scroll indicator only on hover */
+  .scrollable:hover::before {
+    opacity: 1;
+  }
+  
+  /* Highlight the scrollable areas */
+  .scrollable:hover {
+    background-color: #cce7e7;
+    box-shadow: 0 0 8px rgba(0, 123, 123, 0.3); /* Adding subtle glow */
+  }
+  
+  /* Focused state (keyboard navigation or click) */
+  .scrollable:focus {
+    outline: none;
+    border-color: #00796b;
+    box-shadow: 0 0 5px rgba(0, 123, 123, 0.6);
+  }

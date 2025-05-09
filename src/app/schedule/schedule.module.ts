@@ -15,6 +15,7 @@ import { ButtonModule } from 'primeng/button';
 import { CalendarDayComponent } from './components/calendar-day/calendar-day.component';
 import { ShortDatePipe } from './core/pipes/short-date-pipe.pipe';
 import { SkeletonModule } from 'primeng/skeleton';
+import { TooltipModule } from 'primeng/tooltip';
 @NgModule({
   declarations: [
     ScheduleComponent,
@@ -31,6 +32,7 @@ import { SkeletonModule } from 'primeng/skeleton';
     SkeletonModule,
     FormsModule,
     ReactiveFormsModule,
+    TooltipModule,
     DatePipe,
     DialogModule,
     ButtonModule,

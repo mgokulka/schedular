@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.8](https://github.com/mgokulka/schedular/compare/v0.0.3...v0.0.8) (2025-05-25)
+
+
+### Features
+
+* **header component:** scrollable month and year selection ([638bc11](https://github.com/mgokulka/schedular/commit/638bc119abc8fc8f66ce1dcee75e0cc9589107ac))
+* **Navbar:** Navbar and routing added ([204d796](https://github.com/mgokulka/schedular/commit/204d79647d984f960c8dca9eb5479be7ac5c3dea))
+
+
+### Bug Fixes
+
+* **week component:** header date selection and date range bug fix ([e3ae02b](https://github.com/mgokulka/schedular/commit/e3ae02b384039c9f779c195c47c27f312728af6d))
+
 ### [0.0.7](https://github.com/mgokulka/schedular/compare/v0.0.6...v0.0.7) (2025-05-09)
 
 

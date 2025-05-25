@@ -1,16 +1,16 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { RouterModule, RouterOutlet } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
-import { ScheduleComponent } from './schedule/schedule.component';
 import { ScheduleModule } from './schedule/schedule.module';
-
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ButtonModule,ScheduleModule],
+  imports: [RouterOutlet,RouterModule, ButtonModule, ScheduleModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'my-app';
+
+  ngOnInit(): void {}
 }

@@ -3,7 +3,7 @@
     class="col-3 custom_table_sidebar border-end border-2 border-secondary me-3"
   >
     <div class="justify-content-end d-flex align-items-center">
-      <h3>Locations</h3>
+      <h3>Content</h3>
     </div>
   </section>
 
@@ -45,18 +45,10 @@
       {{ location }}
     </div>
     <div class="col-9 text-center">
-      <div class="row d-flex gap-2">
-        <div class="col border shadow" *ngFor="let itm of events">
-          @if(itm.id===i){
-          <div class="event-box">
-            <p-skeleton
-              height="1rem"
-              width="1rem"
-              borderRadius="16px"
-              class="m-1 bg-light1"
-            />{{ itm.title }}
-          </div>
-          }
+      <div class="row d-flex">
+        <div class="col event-box" *ngFor="let itm of [1, 2, 3, 4, 5, 6, 7]">
+          <p-skeleton height="1rem" borderRadius="16px" class="m-1 bg-light1" />
+          <p-skeleton height="2rem" borderRadius="16px" class="m-1" />
         </div>
       </div>
     </div>
